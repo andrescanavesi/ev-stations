@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Aguilar",
+    "address": "Av Gral Aguilar 2403",
+    "lat": -34.885124,
+    "lng": -56.195179,
+    "connectorStatusAcc": [{
+      "count": 1,
+      "type": "Tipo 2",
+      "power": 43.0,
+      "status": 0,
+      "statusDetail": "Available",
+      "hose": true,
+      "detail": ""
+    }],
+    "chargeNetworkName": "PUBLIC",
+    "department": "Montevideo",
+    "city": "Montevideo",
+    "status": "Disponible"
+  },
+  {
+    "name": "ANCAP Colonia del Sacramento",
+    "address": "Av. Buenos Aires y 18 de Julio",
+    "lat": -34.471664,
+    "lng": -57.841764,
+    "connectorStatusAcc": [{
+      "count": 1,
+      "type": "CCS2",
+      "power": 60.0,
+      "status": 0,
+      "statusDetail": "Available",
+      "hose": true,
+      "detail": ""
+    }, {
+      "count": 1,
+      "type": "CCS2",
+      "power": 60.0,
+      "status": 1,
+      "statusDetail": "Busy",
+      "hose": true,
+      "detail": "59 min."
+    }],
+    "chargeNetworkName": "PUBLIC",
+    "department": "Colonia",
+    "city": "Colonia",
+    "status": "Disponible"
+  },
+  {
+    "name": "Estación Península",
+    "address": "Capitán Miranda esquina El Trinquete",
+    "lat": -34.967524,
+    "lng": -54.951832,
+    "connectorStatusAcc": [{
+      "count": 2,
+      "type": "Tipo 2",
+      "power": 22.0,
+      "status": 0,
+      "statusDetail": "Available",
+      "hose": true,
+      "detail": ""
+    }],
+    "chargeNetworkName": "PUBLIC",
+    "department": "Maldonado",
+    "city": "Pta del Este",
+    "status": "Disponible"
+  }, {
+  "name": "ANCAP Chuy",
+  "address": "Gral Artigas 209 y Samuel Prilliac, 27100",
+  "lat": -33.694694,
+  "lng": -53.455267,
+  "connectorStatusAcc": [{
+    "count": 1,
+    "type": "Tipo 2",
+    "power": 22.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": false,
+    "detail": ""
+  }],
+  "chargeNetworkName": "PUBLIC",
+  "department": "Rocha",
+  "city": "Chuy",
+  "status": "Disponible"
+}
+]
