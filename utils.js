@@ -8,6 +8,7 @@ const fetchStations = async () =>{
         throw new Error(`error fetching stations: ${response.status} - ${response.statusText}`);
     }
     let stations = await response.json();
+    console.info('all stations: ', stations.length)
     return filterStations(stations);
 }
 
