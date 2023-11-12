@@ -51,7 +51,8 @@ const filterStations = (stationsArray) => {
 
     //console.table(stations);
     console.info('public stations loaded:', stations.length);
-    document.getElementById('countStations').innerHTML = stations.length;
+    const countStationsDiv =  document.getElementById('countStations');
+    if(countStationsDiv) countStationsDiv.innerHTML = stations.length;
     return sortStationsByDepartment(stations);
 }
 
@@ -62,19 +63,20 @@ const getMaxPowerByStation = (station) => {
     }
     return maxPower;
 }
-const getSelectedRadio = (radioName) => {
-    const radios = document.getElementsByName(radioName)
+const getSelectedRadio = (radioName, defaultValue) => {
+    const radios = document.getElementsByName(radioName);
+    if(!radios) return defaultValue;
     for (let i = 0; i < radios.length; i++) {
         if(radios[i].checked) return radios[i].value;
     }
 }
 
 const getSelectedPower = () => {
-    return getSelectedRadio('powerRadio');
+    return getSelectedRadio('powerRadio', 0);
 }
 
 const getSelectedConnector = () => {
-    return getSelectedRadio('connectorRadio');
+    return getSelectedRadio('connectorRadio', 'all');
 }
 
 
@@ -106,6 +108,7 @@ const sortStationsByDepartment = (stations) =>{
 
 const loadStationsTable = (stations)=>{
     const table = document.getElementById("stationsTable");
+    if(!table) return;
 
     const rowCount = table.rows.length;
     console.info('row count', rowCount)
@@ -114,7 +117,6 @@ const loadStationsTable = (stations)=>{
             table.deleteRow(1);
         }
     }
-
 
     let index = 1;
     for (const station of stations) {
@@ -185,6 +187,7 @@ const createMapMarker = (station, map) =>{
 
 const loadMap = (stations)=>{
     const mapDiv = document.getElementById("map");
+    if(!mapDiv) return;
 
     const map = new google.maps.Map(mapDiv, {
         zoom: DEFAULT_MAP_ZOOM,
