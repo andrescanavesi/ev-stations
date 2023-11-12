@@ -8,13 +8,74 @@ const fetchStations = async () =>{
         throw new Error(`error fetching stations: ${response.status} - ${response.statusText}`);
     }
     let stations = await response.json();
-    stations = stations.map((station) => station.map((connector) => connector.info = `${connector.count} de tipo ${connector.type} de ${connector.power}kw ${connector.hose ? 'con cable' : 'sin cable'}`))
-    stations = stations.map((station) => station.countFastConnectors = countFastConnectorsByStation(station));
+    return filterStations(stations);
+}
+
+const reload =  () =>{
+    console.info('reload')
+    fetchStations().then((stations)=> {
+        loadStationsTable(stations);
+        loadMap(stations);
+        console.info('reloaded')
+    }).catch((err)=> console.error(err))
+}
+
+const filterStations = (stationsArray) => {
+    let stations = stationsArray.map((station) =>{
+        station.connectorStatusAcc.map((connector) =>{
+            connector.info = `${connector.count} ${connector.type} de ${connector.power}kw ${connector.hose ? 'con cable' : 'sin cable'}`;
+            return connector;
+        });
+        return station;
+    })
+    stations = stations.map((station) =>{
+        station.countFastConnectors = countFastConnectorsByStation(station);
+        station.maxPower = getMaxPowerByStation(station);
+        return station;
+    } );
     // get only public stations
     stations = stations.filter((station) => station.chargeNetworkName === 'PUBLIC');
+
+    // filter by power
+    const power = getSelectedPower();
+    console.info('power', power);
+    stations = stations.filter((station) => station.maxPower >= power);
+
+    // filter by connector type
+    const connectorName = getSelectedConnector();
+    console.info('connector', connectorName);
+    if(connectorName !== 'all'){
+        stations = stations.filter((station) => station.connectorStatusAcc.some((connector) => connector.type === connectorName && connector.power >= power));
+    }
+
+    //console.table(stations);
     console.info('public stations loaded:', stations.length);
+    document.getElementById('countStations').innerHTML = stations.length;
     return sortStationsByDepartment(stations);
 }
+
+const getMaxPowerByStation = (station) => {
+    let maxPower = 0
+    for (const connector of station.connectorStatusAcc) {
+        if(connector.power > maxPower) maxPower = connector.power;
+    }
+    return maxPower;
+}
+const getSelectedRadio = (radioName) => {
+    const radios = document.getElementsByName(radioName)
+    for (let i = 0; i < radios.length; i++) {
+        if(radios[i].checked) return radios[i].value;
+    }
+}
+
+const getSelectedPower = () => {
+    return getSelectedRadio('powerRadio');
+}
+
+const getSelectedConnector = () => {
+    return getSelectedRadio('connectorRadio');
+}
+
 
 const filterByFastStations = (stations) => {
     return  stations.filter((item) => item.connectorStatusAcc.some((connector) => connector.power >= FAST_STATION_POWER));
@@ -30,6 +91,7 @@ const filterByConnectorType = (stations, connectorType) => {
 }
 
 const countFastConnectorsByStation = (station) => {
+    //console.info(station)
     return station.connectorStatusAcc.reduce((count, connector) => connector.power >= FAST_STATION_POWER ? connector.count : 0);
 }
 
@@ -43,6 +105,15 @@ const sortStationsByDepartment = (stations) =>{
 
 const loadStationsTable = (stations)=>{
     const table = document.getElementById("stationsTable");
+
+    const rowCount = table.rows.length;
+    console.info('row count', rowCount)
+    if(rowCount > 1){
+        for (let i = 1; i < rowCount; i++) {
+            table.deleteRow(1);
+        }
+    }
+
 
     let index = 1;
     for (const station of stations) {
@@ -62,7 +133,13 @@ const loadStationsTable = (stations)=>{
         cell3.innerHTML = station.department;
         cell4.innerHTML = station.city;
         cell5.innerHTML = station.address;
-        cell6.innerHTML = station.info;
+
+        let info = `<ul>`;
+        for(const connector of station.connectorStatusAcc){
+            info += `<li>${connector.info}</li>`;
+        }
+        info += `</ul>`;
+        cell6.innerHTML = info;
 
         index++;
     }
