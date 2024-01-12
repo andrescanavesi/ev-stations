@@ -1,6 +1,6 @@
 const stationsOldest = require('./stations/stations-2023-11-08.json');
-const stationsOld = require('./stations/stations-2023-12-24.json');
-const stationsNew = require('./stations/stations-2023-12-28.json');
+const stationsOld = require('./stations/stations-2023-12-30.json');
+const stationsNew = require('./stations/stations-2024-01-12.json');
 
 // it detects the new stations added
 const newOnes = [];
@@ -30,22 +30,39 @@ for (const stationNew of stationsNew) {
 }
 
 const removed = [];
+let removedFriendly = [];
 for (const stationOld of stationsOldest) {
     let found = false;
     for (const stationNew of stationsNew) {
         if(stationOld.lat == stationNew.lat && stationOld.lng == stationNew.lng) found = true;
     }
-    if(!found) removed.push(stationOld);
+    if(!found) {
+
+        const elem = {
+            nombre: stationOld.name,
+            departamento: stationOld.department,
+            ciudad: stationOld.city,
+            direccion: stationOld.address,
+        };
+        let connectorText = '';
+        for (const connector of stationOld.connectorStatusAcc) {
+            const conn = `${connector.type}-${connector.power}kw`;
+            if(!elem[conn]) elem[conn] = connector.count;
+        }
+        removedFriendly.push(elem);
+
+        removed.push(stationOld);
+    }
 }
 
 
 
 console.info('new ones');
-console.table(newOnes);
+//console.table(newOnes);
 console.table(newOnesFriendly);
 //console.log(JSON.stringify(newOnes, null, 2))
 
 console.info('removed');
-console.table(removed);
+console.table(removedFriendly);
 
 
