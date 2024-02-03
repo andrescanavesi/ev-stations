@@ -22,21 +22,13 @@
   "lat": -34.471664,
   "lng": -57.841764,
   "connectorStatusAcc": [{
-    "count": 1,
+    "count": 2,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "3 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Colonia",
@@ -69,28 +61,36 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 22.0,
-    "status": 1,
-    "statusDetail": "Busy",
+    "status": 0,
+    "statusDetail": "Available",
     "hose": false,
-    "detail": "6 horas, 35 min."
+    "detail": ""
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Rocha",
   "city": "Chuy",
-  "status": "Cargando"
+  "status": "Disponible"
 }, {
   "name": "Joanicó",
   "address": "Joanicó esquina Bv. Jose Batlle y Ordoñez",
   "lat": -34.87903,
   "lng": -56.148899,
   "connectorStatusAcc": [{
-    "count": 3,
+    "count": 2,
+    "type": "Tipo 2",
+    "power": 43.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }, {
+    "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": "24/01/2024"
+    "detail": "23/12/2023"
   }, {
     "count": 1,
     "type": "Tipo 2",
@@ -98,12 +98,12 @@
     "status": 3,
     "statusDetail": "Error",
     "hose": true,
-    "detail": "25/01/2024"
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "TAXI",
   "department": "Montevideo",
   "city": "Montevideo",
-  "status": "Desconocido"
+  "status": "Disponible"
 }, {
   "name": "Parking Leguizamón",
   "address": "Jose Leguizamon 3463",
@@ -167,15 +167,15 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
-    "status": 1,
-    "statusDetail": "Busy",
+    "status": 2,
+    "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": "3 horas, 53 min."
+    "detail": "01/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Canelones",
   "city": "Ciudad de la Costa",
-  "status": "Cargando"
+  "status": "Desconocido"
 }, {
   "name": "ANCAP Rosario",
   "address": "Ruta 2. esq.Baltasar Brum",
@@ -185,15 +185,15 @@
     "count": 1,
     "type": "CCS2",
     "power": 30.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 2,
+    "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": ""
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Colonia",
   "city": "Rosario",
-  "status": "Disponible"
+  "status": "Desconocido"
 }, {
   "name": "ANCAP Rocha",
   "address": "Ruta 9 km 206,400, 27000",
@@ -222,7 +222,7 @@
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "24 min."
+    "detail": "12 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Rocha",
@@ -248,7 +248,7 @@
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": "15/01/2024"
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Canelones",
@@ -260,7 +260,7 @@
   "lat": -34.905827,
   "lng": -56.185525,
   "connectorStatusAcc": [{
-    "count": 4,
+    "count": 3,
     "type": "Tipo 2",
     "power": 43.0,
     "status": 0,
@@ -271,18 +271,18 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "1 hora, 36 min."
-  }, {
-    "count": 1,
-    "type": "Tipo 2",
-    "power": 43.0,
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": true,
     "detail": "21/06/2023"
+  }, {
+    "count": 2,
+    "type": "Tipo 2",
+    "power": 43.0,
+    "status": 3,
+    "statusDetail": "Error",
+    "hose": true,
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -377,15 +377,15 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 22.0,
-    "status": 2,
-    "statusDetail": "Unavaliable",
+    "status": 0,
+    "statusDetail": "Available",
     "hose": true,
-    "detail": "06/12/2023"
+    "detail": ""
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Rivera",
   "city": "Buena Unión",
-  "status": "Desconocido"
+  "status": "Disponible"
 }, {
   "name": "ANCAP Durazno",
   "address": "Brigadier Gral. Fructuoso Rivera",
@@ -464,13 +464,21 @@
   "lat": -34.8552258,
   "lng": -56.1321889,
   "connectorStatusAcc": [{
-    "count": 3,
+    "count": 2,
+    "type": "Tipo 2",
+    "power": 43.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }, {
+    "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "11 min."
+    "detail": "42 min."
   }, {
     "count": 1,
     "type": "Tipo 2",
@@ -483,7 +491,7 @@
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
   "city": "Montevideo",
-  "status": "Cargando"
+  "status": "Disponible"
 }, {
   "name": "ANCAP José Batlle y Ordóñez",
   "address": "19 de Abril y Ruta 7",
@@ -655,15 +663,15 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
-    "status": 2,
-    "statusDetail": "Unavaliable",
+    "status": 0,
+    "statusDetail": "Available",
     "hose": true,
-    "detail": "28/12/2023"
+    "detail": ""
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Colonia",
   "city": "Nueva Palmira",
-  "status": "Desconocido"
+  "status": "Disponible"
 }, {
   "name": "ANCAP Dolores",
   "address": "Ruta 21 esq. Perimetral Juan Manuel Blanes",
@@ -709,15 +717,15 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
-    "status": 3,
-    "statusDetail": "Error",
+    "status": 0,
+    "statusDetail": "Available",
     "hose": true,
-    "detail": "25/01/2024"
+    "detail": ""
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Canelones",
   "city": "Ciudad de la Costa",
-  "status": "Error"
+  "status": "Disponible"
 }, {
   "name": "ANCAP San José de Mayo - Ocampo",
   "address": "Ruta 3 esquina Av. José Pedro Varela",
@@ -727,15 +735,15 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 1,
+    "statusDetail": "Busy",
     "hose": true,
-    "detail": ""
+    "detail": "2 horas, 9 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "San José",
   "city": "San José de Mayo",
-  "status": "Disponible"
+  "status": "Cargando"
 }, {
   "name": "ANCAP Tala",
   "address": "Tomás Berreta y Guzmán Azuaga",
@@ -755,12 +763,30 @@
   "city": "Tala",
   "status": "Disponible"
 }, {
+  "name": "ANCAP Bella Unión",
+  "address": "Ruta 3 Km. 628,000, 55100 Artigas",
+  "lat": -30.2715,
+  "lng": -57.585944,
+  "connectorStatusAcc": [{
+    "count": 1,
+    "type": "Tipo 2",
+    "power": 22.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }],
+  "chargeNetworkName": "PUBLIC",
+  "department": "Artigas",
+  "city": "Bella Unión",
+  "status": "Disponible"
+}, {
   "name": "Parque de la amistad",
   "address": "Alejo Rosell y Ruis esquina Av. Rivera",
   "lat": -34.9022053,
   "lng": -56.1461137,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
     "status": 0,
@@ -768,13 +794,13 @@
     "hose": true,
     "detail": ""
   }, {
-    "count": 2,
+    "count": 3,
     "type": "Tipo 2",
     "power": 43.0,
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "1 hora, 59 min."
+    "detail": "51 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -807,15 +833,15 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 3,
+    "statusDetail": "Error",
     "hose": true,
-    "detail": ""
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Lavalleja",
   "city": "Minas",
-  "status": "Disponible"
+  "status": "Error"
 }, {
   "name": "ANCAP Treinta y Tres",
   "address": "Ruta 8 Km. 285,000",
@@ -915,15 +941,15 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 22.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 2,
+    "statusDetail": "Unavaliable",
     "hose": false,
-    "detail": ""
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Salto",
   "city": "Salto",
-  "status": "Disponible"
+  "status": "Desconocido"
 }, {
   "name": "ANCAP Sarandí del Yí",
   "address": "Pte. Bernardo Berro 604",
@@ -948,7 +974,7 @@
   "lat": -34.927901,
   "lng": -56.161484,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 3,
     "type": "Tipo 2",
     "power": 43.0,
     "status": 0,
@@ -956,29 +982,29 @@
     "hose": true,
     "detail": ""
   }, {
-    "count": 2,
+    "count": 1,
+    "type": "CHAdeMO",
+    "power": 50.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }, {
+    "count": 1,
+    "type": "CCS2",
+    "power": 50.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }, {
+    "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "1 hora, 7 min."
-  }, {
-    "count": 1,
-    "type": "CHAdeMO",
-    "power": 50.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "39 min."
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 50.0,
-    "status": 3,
-    "statusDetail": "Error",
-    "hose": true,
-    "detail": "25/01/2024"
+    "detail": "48 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -1026,21 +1052,13 @@
   "lat": -32.363165,
   "lng": -54.166607,
   "connectorStatusAcc": [{
-    "count": 1,
+    "count": 2,
     "type": "Tipo 2",
     "power": 22.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": false,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "Tipo 2",
-    "power": 22.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": false,
-    "detail": "4 horas, 44 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Cerro Largo",
@@ -1210,7 +1228,7 @@
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "2 horas, 17 min."
+    "detail": "23 min."
   }, {
     "count": 1,
     "type": "Tipo 2",
@@ -1218,7 +1236,7 @@
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": "24/01/2024"
+    "detail": "30/01/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -1230,6 +1248,14 @@
   "lat": -34.878541678373,
   "lng": -55.0530686243497,
   "connectorStatusAcc": [{
+    "count": 2,
+    "type": "Tipo 2",
+    "power": 22.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": false,
+    "detail": ""
+  }, {
     "count": 1,
     "type": "CCS2",
     "power": 50.0,
@@ -1249,18 +1275,10 @@
     "count": 1,
     "type": "CHAdeMO",
     "power": 50.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 3,
+    "statusDetail": "Error",
     "hose": true,
-    "detail": ""
-  }, {
-    "count": 2,
-    "type": "Tipo 2",
-    "power": 22.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": false,
-    "detail": "2 horas, 54 min."
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
@@ -1286,15 +1304,15 @@
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "6 horas, 53 min."
+    "detail": "4 horas, 26 min."
   }, {
     "count": 1,
-    "type": "CCS2",
+    "type": "CHAdeMO",
     "power": 50.0,
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "instantes"
+    "detail": "31 min."
   }, {
     "count": 1,
     "type": "Tipo 2",
@@ -1305,12 +1323,12 @@
     "detail": "18/12/2023"
   }, {
     "count": 1,
-    "type": "CHAdeMO",
+    "type": "CCS2",
     "power": 50.0,
     "status": 3,
     "statusDetail": "Error",
     "hose": true,
-    "detail": "25/01/2024"
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
@@ -1322,7 +1340,7 @@
   "lat": -34.9421081542969,
   "lng": -54.9324188232422,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 4,
     "type": "Tipo 2",
     "power": 22.0,
     "status": 0,
@@ -1337,14 +1355,6 @@
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 2,
-    "type": "Tipo 2",
-    "power": 22.0,
-    "status": 2,
-    "statusDetail": "Unavaliable",
-    "hose": false,
-    "detail": "25/01/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
@@ -1367,10 +1377,10 @@
     "count": 2,
     "type": "CCS2",
     "power": 60.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 2,
+    "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": ""
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
@@ -1382,13 +1392,21 @@
   "lat": -34.86203,
   "lng": -55.274783,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 1,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
+  }, {
+    "count": 1,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 1,
+    "statusDetail": "Busy",
+    "hose": true,
+    "detail": "12 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
@@ -1429,10 +1447,10 @@
     "count": 2,
     "type": "CCS2",
     "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
+    "status": 0,
+    "statusDetail": "Available",
     "hose": true,
-    "detail": "30 min."
+    "detail": ""
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -1522,7 +1540,7 @@
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": false,
-    "detail": "25/01/2024"
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Treinta y Tres",
@@ -1534,21 +1552,13 @@
   "lat": -31.7262242,
   "lng": -55.9718609,
   "connectorStatusAcc": [{
-    "count": 1,
+    "count": 2,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "1 hora, 3 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Tacuarembó",
@@ -1578,13 +1588,21 @@
   "lat": -31.4558512,
   "lng": -57.9096333,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 1,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
+  }, {
+    "count": 1,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 1,
+    "statusDetail": "Busy",
+    "hose": true,
+    "detail": "6 horas, 9 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Salto",
@@ -1617,15 +1635,15 @@
     "count": 2,
     "type": "CCS2",
     "power": 60.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 3,
+    "statusDetail": "Error",
     "hose": true,
-    "detail": ""
+    "detail": "02/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Artigas",
   "city": "Artigas",
-  "status": "Disponible"
+  "status": "Error"
 }, {
   "name": "Plaza Artigas",
   "address": "Gral. eugenio Garzón y Eduardo Castro",
@@ -1722,26 +1740,18 @@
   "lat": -33.508249,
   "lng": -56.937011,
   "connectorStatusAcc": [{
-    "count": 1,
+    "count": 2,
     "type": "CCS2",
     "power": 30.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 3,
+    "statusDetail": "Error",
     "hose": true,
-    "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 30.0,
-    "status": 2,
-    "statusDetail": "Unavaliable",
-    "hose": true,
-    "detail": "25/01/2024"
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Flores",
   "city": "Trinidad",
-  "status": "Disponible"
+  "status": "Error"
 }, {
   "name": "Plaza San Jacinto",
   "address": "Maria Vera esq. Cayetano Gonzalez",
@@ -1759,6 +1769,24 @@
   "chargeNetworkName": "PUBLIC",
   "department": "Canelones",
   "city": "San Jacinto",
+  "status": "Disponible"
+}, {
+  "name": "Plaza de Toros de Colonia",
+  "address": "Juan Manuel Caballero y Río de la Plata",
+  "lat": -34.437433,
+  "lng": -57.8650452,
+  "connectorStatusAcc": [{
+    "count": 2,
+    "type": "Tipo 2",
+    "power": 22.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": false,
+    "detail": ""
+  }],
+  "chargeNetworkName": "PUBLIC",
+  "department": "Colonia",
+  "city": "Colonia del Sacramento",
   "status": "Disponible"
 }, {
   "name": "Libertad",
@@ -1860,7 +1888,7 @@
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": false,
-    "detail": "09/01/2024"
+    "detail": "02/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "San José",
@@ -1878,7 +1906,7 @@
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": "21/01/2024"
+    "detail": "02/02/2024"
   }, {
     "count": 1,
     "type": "Tipo 2",
@@ -1886,7 +1914,7 @@
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": "21/01/2024"
+    "detail": "02/02/2024"
   }, {
     "count": 1,
     "type": "CCS2",
@@ -1894,7 +1922,7 @@
     "status": 2,
     "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": "21/01/2024"
+    "detail": "02/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "San José",
@@ -1911,16 +1939,16 @@
     "power": 7.4,
     "status": 0,
     "statusDetail": "Available",
-    "hose": true,
+    "hose": false,
     "detail": ""
   }, {
     "count": 1,
     "type": "Tipo 2",
     "power": 7.4,
-    "status": 0,
-    "statusDetail": "Available",
-    "hose": false,
-    "detail": ""
+    "status": 1,
+    "statusDetail": "Busy",
+    "hose": true,
+    "detail": "2 horas, 12 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -1932,13 +1960,21 @@
   "lat": -32.3183645,
   "lng": -58.0743682,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 1,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
+  }, {
+    "count": 1,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 1,
+    "statusDetail": "Busy",
+    "hose": true,
+    "detail": "41 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Paysandú",
@@ -1986,21 +2022,13 @@
   "lat": -33.2346165,
   "lng": -54.3985881,
   "connectorStatusAcc": [{
-    "count": 1,
+    "count": 2,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "8 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Treinta y Tres",
@@ -2030,21 +2058,13 @@
   "lat": -34.5226273,
   "lng": -56.2752567,
   "connectorStatusAcc": [{
-    "count": 1,
+    "count": 2,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "13 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Canelones",
@@ -2113,36 +2133,28 @@
     "count": 2,
     "type": "Tipo 2",
     "power": 22.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 2,
+    "statusDetail": "Unavaliable",
     "hose": false,
-    "detail": ""
+    "detail": "01/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Salto",
   "city": "Salto",
-  "status": "Disponible"
+  "status": "Desconocido"
 }, {
   "name": "Plaza Paul Harris",
   "address": "Barradas y Av. Italia",
   "lat": -34.8763551,
   "lng": -56.0377477,
   "connectorStatusAcc": [{
-    "count": 3,
+    "count": 4,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "19 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -2154,7 +2166,7 @@
   "lat": -34.873082,
   "lng": -56.248884,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 1,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
@@ -2169,6 +2181,14 @@
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
+  }, {
+    "count": 1,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 1,
+    "statusDetail": "Busy",
+    "hose": true,
+    "detail": "19 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -2250,18 +2270,26 @@
   "lat": -34.86731,
   "lng": -56.160038,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 1,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }, {
+    "count": 1,
     "type": "CCS2",
     "power": 60.0,
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "26 min."
+    "detail": "34 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
   "city": "Montevideo",
-  "status": "Cargando"
+  "status": "Disponible"
 }, {
   "name": "Plaza Artigas - Mercedes",
   "address": "Gral. José G. Artigas y Don Bosco",
@@ -2304,21 +2332,13 @@
   "lat": -34.9133183,
   "lng": -54.8618576,
   "connectorStatusAcc": [{
-    "count": 1,
+    "count": 2,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "26 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
@@ -2333,36 +2353,28 @@
     "count": 1,
     "type": "CCS2",
     "power": 30.0,
-    "status": 1,
-    "statusDetail": "Busy",
+    "status": 0,
+    "statusDetail": "Available",
     "hose": true,
-    "detail": "47 min."
+    "detail": ""
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Canelones",
   "city": "Atlántida",
-  "status": "Cargando"
+  "status": "Disponible"
 }, {
   "name": "Hospital de Pan de Azúcar",
   "address": "Francisco Bonilla y Rincón",
   "lat": -34.7787262,
   "lng": -55.2240453,
   "connectorStatusAcc": [{
-    "count": 1,
+    "count": 2,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "1 hora, 37 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
@@ -2374,21 +2386,13 @@
   "lat": -34.890289,
   "lng": -56.185279,
   "connectorStatusAcc": [{
-    "count": 3,
+    "count": 4,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "CCS2",
-    "power": 60.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": true,
-    "detail": "35 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -2411,6 +2415,58 @@
   "chargeNetworkName": "PUBLIC",
   "department": "Durazno",
   "city": "Pueblo Centenario",
+  "status": "Disponible"
+}, {
+  "name": "Hospital de Ojos Saint Bois",
+  "address": "Camino Fauquet y Guanahani",
+  "lat": -34.7889098,
+  "lng": -56.2417871,
+  "connectorStatusAcc": [{
+    "count": 1,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }, {
+    "count": 1,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 3,
+    "statusDetail": "Error",
+    "hose": true,
+    "detail": "02/02/2024"
+  }],
+  "chargeNetworkName": "PUBLIC",
+  "department": "Montevideo",
+  "city": "Montevideo",
+  "status": "Disponible"
+}, {
+  "name": "Colonia Shopping",
+  "address": "Franklin Roosevelt y Fray Bentos",
+  "lat": -34.4661563,
+  "lng": -57.835495,
+  "connectorStatusAcc": [{
+    "count": 2,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }, {
+    "count": 1,
+    "type": "GB/T",
+    "power": 30.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }],
+  "chargeNetworkName": "PUBLIC",
+  "department": "Colonia",
+  "city": "Colonia del Sacramento",
   "status": "Disponible"
 }, {
   "name": "Rocha - Oficina de Turismo",
@@ -2457,15 +2513,15 @@
     "count": 2,
     "type": "Tipo 2",
     "power": 22.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 1,
+    "statusDetail": "Busy",
     "hose": false,
-    "detail": ""
+    "detail": "3 horas, 44 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Rocha",
   "city": "La Paloma",
-  "status": "Disponible"
+  "status": "Cargando"
 }, {
   "name": "Casino Parque Hotel",
   "address": "Dr. Luis Piera y Lauro Müller",
@@ -2475,6 +2531,14 @@
     "count": 1,
     "type": "CCS2",
     "power": 50.0,
+    "status": 0,
+    "statusDetail": "Available",
+    "hose": true,
+    "detail": ""
+  }, {
+    "count": 2,
+    "type": "Tipo 2",
+    "power": 43.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
@@ -2491,18 +2555,10 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
-    "status": 0,
-    "statusDetail": "Available",
-    "hose": true,
-    "detail": ""
-  }, {
-    "count": 2,
-    "type": "Tipo 2",
-    "power": 43.0,
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "46 min."
+    "detail": "44 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -2568,21 +2624,13 @@
   "lat": -34.909845,
   "lng": -56.204714,
   "connectorStatusAcc": [{
-    "count": 3,
+    "count": 4,
     "type": "Tipo 2",
     "power": 22.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": false,
     "detail": ""
-  }, {
-    "count": 1,
-    "type": "Tipo 2",
-    "power": 22.0,
-    "status": 1,
-    "statusDetail": "Busy",
-    "hose": false,
-    "detail": "2 horas, 40 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -2626,7 +2674,7 @@
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "5 min."
+    "detail": "41 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Montevideo",
@@ -2685,15 +2733,15 @@
     "count": 2,
     "type": "Tipo 2",
     "power": 22.0,
-    "status": 2,
-    "statusDetail": "Unavaliable",
+    "status": 0,
+    "statusDetail": "Available",
     "hose": false,
-    "detail": "25/01/2024"
+    "detail": ""
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
   "city": "Maldonado",
-  "status": "Desconocido"
+  "status": "Disponible"
 }, {
   "name": "Municipio Vergara",
   "address": "Jacinto Ruiz esq. Dionisio Coronel",
@@ -2736,13 +2784,21 @@
   "lat": -33.116197,
   "lng": -58.313329,
   "connectorStatusAcc": [{
-    "count": 2,
+    "count": 1,
     "type": "CCS2",
     "power": 60.0,
     "status": 0,
     "statusDetail": "Available",
     "hose": true,
     "detail": ""
+  }, {
+    "count": 1,
+    "type": "CCS2",
+    "power": 60.0,
+    "status": 1,
+    "statusDetail": "Busy",
+    "hose": true,
+    "detail": "2 horas, 12 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Río Negro",
@@ -2865,15 +2921,15 @@
     "count": 2,
     "type": "CCS2",
     "power": 60.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 3,
+    "statusDetail": "Error",
     "hose": true,
-    "detail": ""
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Rocha",
   "city": "La Paloma",
-  "status": "Disponible"
+  "status": "Error"
 }, {
   "name": "Plaza Batlle y Ordóñez",
   "address": "Treinta y Tres y Av. Carlos Lecueder",
@@ -2883,15 +2939,15 @@
     "count": 1,
     "type": "Tipo 2",
     "power": 43.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 2,
+    "statusDetail": "Unavaliable",
     "hose": true,
-    "detail": ""
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Artigas",
   "city": "Artigas",
-  "status": "Disponible"
+  "status": "Desconocido"
 }, {
   "name": "Plaza Rivera Minas",
   "address": "Ituzaingó esquina Franklin Delano Roosevelt",
@@ -2901,15 +2957,15 @@
     "count": 2,
     "type": "CCS2",
     "power": 60.0,
-    "status": 3,
-    "statusDetail": "Error",
+    "status": 0,
+    "statusDetail": "Available",
     "hose": true,
-    "detail": "24/01/2024"
+    "detail": ""
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Lavalleja",
   "city": "Minas",
-  "status": "Error"
+  "status": "Disponible"
 }, {
   "name": "San Rafael",
   "address": "Acapulco y Av. Mar del Plata",
@@ -2930,7 +2986,7 @@
     "status": 1,
     "statusDetail": "Busy",
     "hose": true,
-    "detail": "29 min."
+    "detail": "12 min."
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Maldonado",
@@ -2945,13 +3001,13 @@
     "count": 1,
     "type": "CCS2",
     "power": 30.0,
-    "status": 0,
-    "statusDetail": "Available",
+    "status": 3,
+    "statusDetail": "Error",
     "hose": true,
-    "detail": ""
+    "detail": "03/02/2024"
   }],
   "chargeNetworkName": "PUBLIC",
   "department": "Canelones",
   "city": "Pando",
-  "status": "Disponible"
+  "status": "Error"
 }]
