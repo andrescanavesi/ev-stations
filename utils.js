@@ -127,6 +127,9 @@ const filterByConnectorType = (stations, connectorType) => {
 
 const countFastConnectorsByStation = (station) => {
     //console.info(station)
+    if(!station) return 0;
+    if(!station.connectorStatusAcc) return 0;
+    if(station.connectorStatusAcc.length === 0) return 0;
     return station.connectorStatusAcc.reduce((count, connector) => connector.power >= FAST_STATION_POWER ? connector.count : 0);
 }
 
