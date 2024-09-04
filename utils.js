@@ -1,5 +1,6 @@
 // const STATIONS_DATA_SOURCE = 'https://cdn.jsdelivr.net/gh/andrescanavesi/ev-stations@main/stations/stations-last.json'
-const STATIONS_DATA_SOURCE = 'https://cdn.jsdelivr.net/gh/andrescanavesi/ev-stations@c4b67da17331ff4065a50778dcc5b0ec7d1f478e/stations/stations-last.json'
+//const STATIONS_DATA_SOURCE = 'https://cdn.jsdelivr.net/gh/andrescanavesi/ev-stations@853856850d7883e2c4e7339c814f74d0e816c7d6/stations/stations-2024-05-21.json'
+const STATIONS_DATA_SOURCE =  'https://cdn.jsdelivr.net/gh/andrescanavesi/ev-stations@853856850d7883e2c4e7339c814f74d0e816c7d6/stations/stations-2024-09-04.json';
 const FAST_STATION_POWER = 45;
 const CENTER_URUGUAY = { lat: -32.951477, lng: -56.114227 };
 const DEFAULT_MAP_ZOOM = 7;
@@ -24,6 +25,7 @@ const reload =  () =>{
 }
 
 const filterStations = (stationsArray) => {
+    console.info('stationsArray before filtering:', stationsArray.length);
     let stations = stationsArray.map((station) =>{
         station.connectorStatusAcc.map((connector) =>{
             connector.info = `${connector.count} ${connector.type} de ${connector.power}kw ${connector.hose ? 'con cable' : 'sin cable'}`;
@@ -31,18 +33,23 @@ const filterStations = (stationsArray) => {
         });
         return station;
     })
+    //console.info('stations 1:', stations.length);
+
     stations = stations.map((station) =>{
         station.countFastConnectors = countFastConnectorsByStation(station);
         station.maxPower = getMaxPowerByStation(station);
         return station;
     } );
+    //console.info('stations 2:', stations.length);
     // get only public stations
-    stations = stations.filter((station) => station.chargeNetworkName === 'PUBLIC');
+    //stations = stations.filter((station) => station.chargeNetworkName === 'PUBLIC');
+    //console.info('stations 3:', stations.length);
 
     // filter by power
     const power = getSelectedPower();
     //console.info('power', power);
     stations = stations.filter((station) => station.maxPower >= power);
+    //console.info('stations 4:', stations.length);
 
     // filter by connector type
     const connectorName = getSelectedConnector();
@@ -50,9 +57,10 @@ const filterStations = (stationsArray) => {
     if(connectorName !== 'all'){
         stations = stations.filter((station) => station.connectorStatusAcc.some((connector) => connector.type === connectorName && connector.power >= power));
     }
+    console.info('stations 5:', stations.length);
 
-    console.table(stations);
-    //console.info('public stations loaded:', stations.length);
+    //console.table(stations);
+    console.info('public stations loaded:', stations.length);
     const countStationsDiv =  document.getElementById('countStations');
     if(countStationsDiv) countStationsDiv.innerHTML = stations.length;
     return sortStationsByDepartment(stations);
@@ -126,7 +134,7 @@ const filterByConnectorType = (stations, connectorType) => {
 }
 
 const countFastConnectorsByStation = (station) => {
-    console.info(station)
+    //console.info(station)
     if(!station) return 0;
     if(!station.connectorStatusAcc) return 0;
     if(station.connectorStatusAcc.length === 0) return 0;
@@ -250,7 +258,7 @@ const loadMap = (stations)=>{
 const getMapZoom = () => {
     let mapZoom = localStorage.getItem("mapZoom");
     if(!mapZoom) mapZoom = DEFAULT_MAP_ZOOM;
-    //console.info('get mapZoom',mapZoom);
+    console.info('get mapZoom',mapZoom);
     return Number(mapZoom);
 }
 
