@@ -10,12 +10,12 @@ const fetchStations = async () =>{
         throw new Error(`error fetching stations: ${response.status} - ${response.statusText}`);
     }
     let stations = await response.json();
-    //console.info('all stations: ', stations.length)
+    console.info('all stations: ', stations.length)
     return filterStations(stations);
 }
 
 const reload =  () =>{
-    //console.info('reload')
+    console.info('reload')
     fetchStations().then((stations)=> {
         loadStationsTable(stations);
         loadMap(stations);
@@ -51,7 +51,7 @@ const filterStations = (stationsArray) => {
         stations = stations.filter((station) => station.connectorStatusAcc.some((connector) => connector.type === connectorName && connector.power >= power));
     }
 
-    //console.table(stations);
+    console.table(stations);
     //console.info('public stations loaded:', stations.length);
     const countStationsDiv =  document.getElementById('countStations');
     if(countStationsDiv) countStationsDiv.innerHTML = stations.length;
@@ -78,20 +78,20 @@ const getSelectedRadio = (radioName, defaultValue) => {
 
 const saveSelectedRadio = (radioName, index) => {
     const key = `${radioName}SelectedIndex`;
-    //console.info(`saveSelectedRadio ${key} index: ${index}`);
+    console.info(`saveSelectedRadio ${key} index: ${index}`);
     localStorage.setItem(key, index);
 }
 
 const loadSelectedRadio = (radioName) => {
     const key = `${radioName}SelectedIndex`;
     let index = localStorage.getItem(key);
-    //console.info(` 1 loadSelectedRadio key: ${key} index: ${index}`);
+    console.info(` 1 loadSelectedRadio key: ${key} index: ${index}`);
     if(!index) index = 0;
     else index = Number(index);
     const radios = document.getElementsByName(radioName);
     if(!radios) return;
     if(!radios[index]) return;
-    //console.info(` 2 loadSelectedRadio key: ${key} index: ${index}`);
+    console.info(` 2 loadSelectedRadio key: ${key} index: ${index}`);
     radios[index].checked = true;
 }
 
@@ -126,7 +126,7 @@ const filterByConnectorType = (stations, connectorType) => {
 }
 
 const countFastConnectorsByStation = (station) => {
-    //console.info(station)
+    console.info(station)
     if(!station) return 0;
     if(!station.connectorStatusAcc) return 0;
     if(station.connectorStatusAcc.length === 0) return 0;
