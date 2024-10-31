@@ -1,6 +1,6 @@
 const stationsOldest = require('./stations/stations-2023-11-08.json');
-const stationsOld = require('./stations/stations-2024-05-21.json');
-const stationsNew = require('./stations/stations-2024-09-04.json');
+const stationsOld = require('./stations/stations-2024-09-04.json');
+const stationsNew = require('./stations/stations-2024-10-31.json');
 
 // it detects the new stations added
 const newOnes = [];
@@ -16,8 +16,8 @@ for (const stationNew of stationsNew) {
         const elem = {
             nombre: stationNew.name,
             departamento: stationNew.department,
-            ciudad: stationNew.city,
-            direccion: stationNew.address,
+            ciudad: stationNew.city
+
         };
         let connectorText = '';
         for (const connector of stationNew.connectorStatusAcc) {
@@ -41,8 +41,8 @@ for (const stationOld of stationsOldest) {
         const elem = {
             nombre: stationOld.name,
             departamento: stationOld.department,
-            ciudad: stationOld.city,
-            direccion: stationOld.address,
+            ciudad: stationOld.city
+
         };
         let connectorText = '';
         for (const connector of stationOld.connectorStatusAcc) {
