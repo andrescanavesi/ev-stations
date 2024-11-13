@@ -1,6 +1,6 @@
 // const STATIONS_DATA_SOURCE = 'https://cdn.jsdelivr.net/gh/andrescanavesi/ev-stations@main/stations/stations-last.json'
 //const STATIONS_DATA_SOURCE = 'https://cdn.jsdelivr.net/gh/andrescanavesi/ev-stations@853856850d7883e2c4e7339c814f74d0e816c7d6/stations/stations-2024-05-21.json'
-const STATIONS_DATA_SOURCE =  'https://cdn.jsdelivr.net/gh/andrescanavesi/ev-stations@9c5dfc201713063f7662169c40d4551e3d4022ce/stations/stations-2024-10-31.json';
+const STATIONS_DATA_SOURCE =  'https://cdn.jsdelivr.net/gh/andrescanavesi/ev-stations@d1edff897d8aaf0d332e36b005499e3a018b93c6/stations/stations-last.json';
 const FAST_STATION_POWER = 45;
 const CENTER_URUGUAY = { lat: -32.951477, lng: -56.114227 };
 const DEFAULT_MAP_ZOOM = 7;
