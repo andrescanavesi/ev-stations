@@ -1,14 +1,14 @@
 const stationsOldest = require('./stations/stations-2023-11-08.json');
-const stationsOld = require('./stations/stations-2025-09-12.json'); // 08-08
-const stationsNew = require('./stations/stations-2025-09-24.json');
+const stationsOld = require('./stations/stations-2025-09-25.json'); // 08-08
+const stationsNew = require('./stations/stations-2025-09-25.json');
 
 // it detects the new stations added
 const newOnes = [];
 let newOnesFriendly = [];
 
-for (const stationNew of stationsNew) {
+for (const stationNew of stationsNew.data) {
     let found = false;
-    for (const stationOld of stationsOld) {
+    for (const stationOld of stationsOld.data) {
         if(stationOld.lat == stationNew.lat && stationOld.lng == stationNew.lng) found = true;
 
     }
@@ -33,7 +33,7 @@ const removed = [];
 let removedFriendly = [];
 for (const stationOld of stationsOldest) {
     let found = false;
-    for (const stationNew of stationsNew) {
+    for (const stationNew of stationsNew.data) {
         if(stationOld.lat == stationNew.lat && stationOld.lng == stationNew.lng) found = true;
     }
     if(!found) {
@@ -77,7 +77,7 @@ function countConnectorTypes(stations) {
     const connectorCounts = new Map();
 
     // Iterate over each station in the provided array
-    for (const station of stations) {
+    for (const station of stations.data) {
         // Check if the station has the connectorStatusAcc property and it's an array
         if (station.connectorStatusAcc && Array.isArray(station.connectorStatusAcc)) {
             // Iterate over each connector in the station's connector list

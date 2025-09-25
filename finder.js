@@ -5,7 +5,11 @@ const path = require('path');
 
 const findNewStations = async () => {
     console.info('getting ev stations...');
-    const response = await fetch("https://movilidad.ute.com.uy/api/station/status/", {
+    //const url  = 'https://movilidad.ute.com.uy/api/station/status/'; // old one from 2025-09-25
+
+    // this new url outputs a different json
+    const url  = 'https://movilidad.ute.com.uy/api/v1/station/status/map';
+    const response = await fetch(url, {
         method: "GET",
         headers: {
             "Accept": "application/json, text/javascript, */*; q=0.01",
