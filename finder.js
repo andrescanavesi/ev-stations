@@ -6,6 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const {processFile} = require("./process");
 const { mkdir } = fs.promises; // Access the promises API from the required 'fs' object
 
 
@@ -38,6 +39,7 @@ const findNewStations = async () => {
     const filePath = await storeData(data);
     console.info(`......`);
     console.info(filePath);
+    await processFile(filePath);
 }
 
 const storeData = async (data) =>{
@@ -125,11 +127,3 @@ const createCurrentMonthFolder =  async () => {
 
 findNewStations().then(()=> console.info('ok')).catch((e)=> console.error(e));
 
-const data = {
-    stations: [
-        { id: 1, name: "Station A" },
-        { id: 2, name: "Station BBBB" }
-    ]
-};
-
-//storeData(data);

@@ -1,188 +1,174 @@
+// dbProcessor.js
+
 const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
 
-// --- Configuración ---
-const dbFile = './estaciones.db'; // Nombre del archivo de la base de datos
+// Database file name
+const DB_FILE = './stations.db';
 
-// --- 1. Conexión e Inicialización de la BD ---
-let db;
-try {
-    // Conecta (o crea) la base de datos
-    db = new Database(dbFile);
-
-    // Habilita las Foreign Keys (importante para la integridad)
-    db.exec('PRAGMA foreign_keys = ON;');
-
-    // Ejecuta el schema para crear las tablas si no existen
-    initDatabase(db);
-
-} catch (err) {
-    console.error('[ERROR] No se pudo conectar a la base de datos:', err.message);
-    process.exit(1); // Termina el script si no hay BD
-}
-
-// --- 2. Función para crear las tablas ---
-function initDatabase(db) {
-    // Usamos 'exec' para correr múltiples sentencias
+/**
+ * Creates the database tables if they do not exist.
+ * @param {Database} db - The better-sqlite3 database instance.
+ */
+function initializeDatabase(db) {
     const schema = `
-    CREATE TABLE IF NOT EXISTS Estaciones (
+    CREATE TABLE IF NOT EXISTS Stations (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      nombre TEXT NOT NULL UNIQUE,
-      direccion TEXT,
+      name TEXT NOT NULL UNIQUE,
+      address TEXT,
       lat REAL,
       lng REAL,
-      departamento TEXT,
-      ciudad TEXT
+      department TEXT,
+      city TEXT
     );
 
-    CREATE TABLE IF NOT EXISTS Grupos_Conectores (
+    CREATE TABLE IF NOT EXISTS ConnectorGroups (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      id_estacion INTEGER NOT NULL,
-      tipo TEXT NOT NULL,
-      potencia INTEGER NOT NULL,
-      cantidad_total INTEGER NOT NULL,
-      FOREIGN KEY (id_estacion) REFERENCES Estaciones(id) ON DELETE CASCADE,
-      UNIQUE(id_estacion, tipo, potencia)
+      station_id INTEGER NOT NULL,
+      type TEXT NOT NULL,
+      power INTEGER NOT NULL,
+      total_count INTEGER NOT NULL,
+      FOREIGN KEY (station_id) REFERENCES Stations(id) ON DELETE CASCADE,
+      UNIQUE(station_id, type, power)
     );
 
-    CREATE TABLE IF NOT EXISTS Lecturas_Estado (
+    CREATE TABLE IF NOT EXISTS StatusReadings (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      id_grupo_conector INTEGER NOT NULL,
+      connector_group_id INTEGER NOT NULL,
       timestamp TEXT NOT NULL,
-      estado TEXT NOT NULL,
-      FOREIGN KEY (id_grupo_conector) REFERENCES Grupos_Conectores(id) ON DELETE CASCADE
+      status TEXT NOT NULL,
+      FOREIGN KEY (connector_group_id) REFERENCES ConnectorGroups(id) ON DELETE CASCADE
     );
   `;
     db.exec(schema);
 }
 
-// --- 3. Función principal para procesar el archivo ---
-function procesarArchivo(filename) {
-    console.log(`🔌 Procesando el archivo: ${filename}`);
+/**
+ * Processes a JSON file, extracts station data, and saves it to the database.
+ * @param {string} filename - The full path to the JSON file to process.
+ * @returns {Promise<number>} A promise that resolves with the total number of readings inserted.
+ */
+async function processFile(filename) {
+    console.log(`\n🔌 [MODULE] Starting processing of: ${path.basename(filename)}`);
+
+    let db;
+    try {
+        // --- 1. DB Connection ---
+        db = new Database(DB_FILE);
+        db.exec('PRAGMA foreign_keys = ON;');
+        initializeDatabase(db);
+        console.log(`[MODULE] Connection established with ${DB_FILE}.`);
+
+    } catch (err) {
+        console.error('[ERROR] Could not connect/initialize database:', err.message);
+        throw new Error('Database connection failed.');
+    }
 
     let fileContent;
     try {
+        // Reading the file synchronously (acceptable for processing scripts)
         fileContent = fs.readFileSync(filename, 'utf8');
     } catch (err) {
-        console.error(`[ERROR] No se pudo leer el archivo: ${filename}`, err.message);
-        return;
+        db.close();
+        console.error(`[ERROR] Could not read file: ${filename}`, err.message);
+        throw new Error(`File read error: ${err.message}`);
     }
 
-    // --- INICIO DE LA MODIFICACIÓN ---
-    // <-- CAMBIO AQUÍ
-    let estaciones;
+    // --- 2. Content Parsing ---
+    let stations;
     try {
-        // Parseamos el objeto JSON completo
         const parsedJson = JSON.parse(fileContent);
-
-        // Verificamos que la propiedad 'data' exista y sea un array
+        // Expecting the data array under the 'data' key
         if (parsedJson && Array.isArray(parsedJson.data)) {
-            estaciones = parsedJson.data; // ¡Este es el array que iteraremos!
+            stations = parsedJson.data;
         } else {
-            console.error(`[ERROR] El JSON no tiene la estructura esperada. No se encontró 'data' o no es un array.`);
-            return; // Salimos de la función si el formato no es correcto
+            db.close();
+            throw new Error(`The JSON structure is unexpected (missing 'data' or it's not an array).`);
         }
-
     } catch (err) {
-        console.error(`[ERROR] El JSON del archivo '${filename}' es inválido:`, err.message);
-        return;
+        db.close();
+        console.error(`[ERROR] JSON parsing failed for '${filename}':`, err.message);
+        throw new Error(`JSON format error: ${err.message}`);
     }
-    // --- FIN DE LA MODIFICACIÓN ---
 
-    // Este es el momento en que se registra la lectura
-    // Usamos el formato ISO 8601, que SQLite entiende perfectamente.
-    const timestampLectura = new Date().toISOString();
+    // --- 3. Prepare SQL Statements (Performance) ---
+    const findStation = db.prepare('SELECT id FROM Stations WHERE name = ?');
+    const insertStation = db.prepare('INSERT INTO Stations (name, address, lat, lng, department, city) VALUES (?, ?, ?, ?, ?, ?)');
 
-    // --- 4. Preparar Sentencias SQL (mucho más rápido) ---
-    const findEstacion = db.prepare('SELECT id FROM Estaciones WHERE nombre = ?');
-    const insertEstacion = db.prepare('INSERT INTO Estaciones (nombre, direccion, lat, lng, departamento, ciudad) VALUES (?, ?, ?, ?, ?, ?)');
+    const findGroup = db.prepare('SELECT id FROM ConnectorGroups WHERE station_id = ? AND type = ? AND power = ?');
+    const insertGroup = db.prepare('INSERT INTO ConnectorGroups (station_id, type, power, total_count) VALUES (?, ?, ?, ?)');
 
-    const findGrupo = db.prepare('SELECT id FROM Grupos_Conectores WHERE id_estacion = ? AND tipo = ? AND potencia = ?');
-    const insertGrupo = db.prepare('INSERT INTO Grupos_Conectores (id_estacion, tipo, potencia, cantidad_total) VALUES (?, ?, ?, ?)');
+    const insertReading = db.prepare('INSERT INTO StatusReadings (connector_group_id, timestamp, status) VALUES (?, ?, ?)');
 
-    const insertLectura = db.prepare('INSERT INTO Lecturas_Estado (id_grupo_conector, timestamp, estado) VALUES (?, ?, ?)');
+    const readingTimestamp = new Date().toISOString();
 
-    // --- 5. Transacción: Todo o nada ---
-    const procesarEstaciones = db.transaction((listaEstaciones, timestamp) => {
-        let lecturasInsertadas = 0;
+    // --- 4. Transaction: All or Nothing ---
+    const processTransaction = db.transaction((stationList, timestamp) => {
+        let readingsInserted = 0;
 
-        for (const estacion of listaEstaciones) {
-            if (!estacion.name || !estacion.connectorStatusAcc) {
-                console.warn(`[AVISO] Estación ignorada por faltar 'name' o 'connectorStatusAcc':`, JSON.stringify(estacion));
+        for (const station of stationList) {
+
+            if (!station.name || !station.connectorStatusAcc) {
+                console.warn(`[WARNING] Station ignored due to missing 'name' or 'connectorStatusAcc'.`);
                 continue;
             }
 
-            // --- Paso A: Encontrar o crear la Estación ---
-            let estacionDB = findEstacion.get(estacion.name);
-            let estacionId;
+            // --- Step A: Find or Create Station ---
+            let stationDB = findStation.get(station.name);
+            let stationId;
 
-            if (!estacionDB) {
-                const info = insertEstacion.run(
-                    estacion.name,
-                    estacion.address,
-                    estacion.lat,
-                    estacion.lng,
-                    estacion.department,
-                    estacion.city
+            if (!stationDB) {
+                const info = insertStation.run(
+                    station.name, station.address, station.lat, station.lng,
+                    station.department, station.city
                 );
-                estacionId = info.lastInsertRowid;
+                stationId = info.lastInsertRowid;
             } else {
-                estacionId = estacionDB.id;
+                stationId = stationDB.id;
             }
 
-            // --- Paso B: Iterar, encontrar o crear Grupos de Conectores ---
-            for (const conector of estacion.connectorStatusAcc) {
+            // --- Step B: Iterate, Find or Create Connector Groups ---
+            for (const connector of station.connectorStatusAcc) {
+                const connectorType = connector.type || "";
+                const connectorPower = connector.power || 0;
 
-                // Vemos que algunos conectores vienen con tipo "" y potencia 0.
-                // Los almacenamos tal cual, ya que son un grupo válido.
-                const tipoConector = conector.type || ""; // Usar "" si es null o undefined
-                const potenciaConector = conector.power || 0; // Usar 0 si es null o undefined
+                let groupDB = findGroup.get(stationId, connectorType, connectorPower);
+                let groupId;
 
-                let grupoDB = findGrupo.get(estacionId, tipoConector, potenciaConector);
-                let grupoId;
-
-                if (!grupoDB) {
-                    const info = insertGrupo.run(
-                        estacionId,
-                        tipoConector,
-                        potenciaConector,
-                        conector.count
+                if (!groupDB) {
+                    const info = insertGroup.run(
+                        stationId, connectorType, connectorPower, connector.count
                     );
-                    grupoId = info.lastInsertRowid;
+                    groupId = info.lastInsertRowid;
                 } else {
-                    grupoId = grupoDB.id;
+                    groupId = groupDB.id;
                 }
 
-                // --- Paso C: Insertar la Lectura de Estado (el dato clave) ---
-                insertLectura.run(grupoId, timestamp, conector.statusDetail);
-                lecturasInsertadas++;
+                // --- Step C: Insert the Status Reading (The core data) ---
+                insertReading.run(groupId, timestamp, connector.statusDetail);
+                readingsInserted++;
             }
         }
-        return lecturasInsertadas;
+        return readingsInserted;
     });
 
-    // --- 6. Ejecutar la transacción ---
+    // --- 5. Execute Transaction and Close DB ---
     try {
-        const total = procesarEstaciones(estaciones, timestampLectura);
-        console.log(`✅ ¡Éxito! Se insertaron ${total} lecturas de estado.`);
+        const total = processTransaction(stations, readingTimestamp);
+        console.log(`✅ [MODULE] Success! Inserted ${total} status readings.`);
+        return total;
     } catch (err) {
-        console.error('[ERROR] Falló la transacción en la base de datos:', err.message);
+        console.error('[ERROR] Database transaction failed:', err.message);
+        throw new Error(`Data insertion failed: ${err.message}`);
+    } finally {
+        // Ensure the database connection is closed whether successful or not
+        db.close();
+        console.log('[MODULE] Database connection closed.');
     }
 }
 
-// --- 7. Ejecución del Script ---
-const archivoAProcesar = process.argv[2];
-
-if (!archivoAProcesar) {
-    console.error('[ERROR] ¡Debes pasar el nombre del archivo JSON a procesar!');
-    console.log('Ejemplo: node procesar.js mi_archivo.json');
-    process.exit(1);
-}
-
-// Iniciar el procesamiento
-procesarArchivo(path.resolve(archivoAProcesar));
-
-// Cerrar la base de datos al final
-db.close();
-console.log('Cerrando conexión con la base de datos.');
+// Export the main function
+module.exports = {
+    processFile
+};
