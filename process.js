@@ -69,20 +69,26 @@ function procesarArchivo(filename) {
         return;
     }
 
+    // --- INICIO DE LA MODIFICACIÓN ---
+    // <-- CAMBIO AQUÍ
     let estaciones;
     try {
-        const data = JSON.parse(fileContent);
-        // Nos aseguramos de que 'estaciones' sea siempre un array,
-        // ya sea que el JSON traiga un objeto o una lista.
-        if (!Array.isArray(data)) {
-            estaciones = [data];
+        // Parseamos el objeto JSON completo
+        const parsedJson = JSON.parse(fileContent);
+
+        // Verificamos que la propiedad 'data' exista y sea un array
+        if (parsedJson && Array.isArray(parsedJson.data)) {
+            estaciones = parsedJson.data; // ¡Este es el array que iteraremos!
         } else {
-            estaciones = data;
+            console.error(`[ERROR] El JSON no tiene la estructura esperada. No se encontró 'data' o no es un array.`);
+            return; // Salimos de la función si el formato no es correcto
         }
+
     } catch (err) {
         console.error(`[ERROR] El JSON del archivo '${filename}' es inválido:`, err.message);
         return;
     }
+    // --- FIN DE LA MODIFICACIÓN ---
 
     // Este es el momento en que se registra la lectura
     // Usamos el formato ISO 8601, que SQLite entiende perfectamente.
@@ -98,14 +104,12 @@ function procesarArchivo(filename) {
     const insertLectura = db.prepare('INSERT INTO Lecturas_Estado (id_grupo_conector, timestamp, estado) VALUES (?, ?, ?)');
 
     // --- 5. Transacción: Todo o nada ---
-    // Usamos una transacción para que todas las inserciones se hagan
-    // de una vez. Es muchísimo más rápido y seguro.
     const procesarEstaciones = db.transaction((listaEstaciones, timestamp) => {
         let lecturasInsertadas = 0;
 
         for (const estacion of listaEstaciones) {
             if (!estacion.name || !estacion.connectorStatusAcc) {
-                console.warn(`[AVISO] Estación ignorada por faltar 'name' o 'connectorStatusAcc':`, estacion);
+                console.warn(`[AVISO] Estación ignorada por faltar 'name' o 'connectorStatusAcc':`, JSON.stringify(estacion));
                 continue;
             }
 
@@ -129,14 +133,20 @@ function procesarArchivo(filename) {
 
             // --- Paso B: Iterar, encontrar o crear Grupos de Conectores ---
             for (const conector of estacion.connectorStatusAcc) {
-                let grupoDB = findGrupo.get(estacionId, conector.type, conector.power);
+
+                // Vemos que algunos conectores vienen con tipo "" y potencia 0.
+                // Los almacenamos tal cual, ya que son un grupo válido.
+                const tipoConector = conector.type || ""; // Usar "" si es null o undefined
+                const potenciaConector = conector.power || 0; // Usar 0 si es null o undefined
+
+                let grupoDB = findGrupo.get(estacionId, tipoConector, potenciaConector);
                 let grupoId;
 
                 if (!grupoDB) {
                     const info = insertGrupo.run(
                         estacionId,
-                        conector.type,
-                        conector.power,
+                        tipoConector,
+                        potenciaConector,
                         conector.count
                     );
                     grupoId = info.lastInsertRowid;
@@ -162,9 +172,6 @@ function procesarArchivo(filename) {
 }
 
 // --- 7. Ejecución del Script ---
-
-// Tomamos el nombre del archivo desde los argumentos de la línea de comandos
-// Ejemplo: node procesar.js result-2025-11-05-30-00.json
 const archivoAProcesar = process.argv[2];
 
 if (!archivoAProcesar) {
