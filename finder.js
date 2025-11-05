@@ -125,5 +125,46 @@ const createCurrentMonthFolder =  async () => {
     }
 }
 
-findNewStations().then(()=> console.info('ok')).catch((e)=> console.error(e));
+//findNewStations().then(()=> console.info('ok')).catch((e)=> console.error(e));
 
+const ONE_MINUTE_MS = 60 * 1000;
+
+/**
+ * Your method that performs asynchronous operations (DB writes, API calls, etc.).
+ * @param {number} runCount - Tracks how many times the function has run.
+ */
+async function start(runCount = 1) {
+    try {
+        const startTime = Date.now();
+        console.log(`\n[Run #${runCount}] Starting task at: ${new Date().toLocaleTimeString()}`);
+
+        // --- 1. Your Asynchronous Logic Goes Here ---
+        // Example: Imagine this processes your JSON file and writes to the DB
+        await findNewStations();
+
+        // Simulating a variable asynchronous task duration (e.g., 20 to 90 seconds)
+        const taskDurationSeconds = Math.floor(Math.random() * 70) + 20;
+        await new Promise(resolve => setTimeout(resolve, taskDurationSeconds * 1000));
+
+        // --- 2. End of Logic ---
+
+        const endTime = Date.now();
+        const actualDuration = ((endTime - startTime) / 1000).toFixed(2);
+
+        console.log(`[Run #${runCount}] Task finished successfully. Duration: ${actualDuration} seconds.`);
+
+    } catch (error) {
+        console.error(`[Run #${runCount}] CRITICAL ERROR during execution:`, error.message);
+        // Depending on the error, you might choose to continue or exit the process.
+    } finally {
+        // --- 3. Schedule the Next Run ---
+        // This is the key: The next call is scheduled ONLY after the current run finishes.
+        console.log(`[Run #${runCount}] Waiting ${ONE_MINUTE_MS / 1000} seconds before next run...`);
+
+        // Use a function wrapper to ensure the next run receives an incremented count
+        setTimeout(() => start(runCount + 1), ONE_MINUTE_MS);
+    }
+}
+
+
+start().then(()=> console.info('process started')).catch((e)=> console.error(e));
