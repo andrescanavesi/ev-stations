@@ -1,6 +1,6 @@
 const stationsOldest = require('./stations/stations-2023-11-08.json');
-const stationsOld = require('./stations/stations-2025-09-25.json'); // 08-08
-const stationsNew = require('./stations/stations-2025-09-25.json');
+const stationsOld = require('./stations/stations-2025-11-03.json'); // 08-08
+const stationsNew = require('./stations/stations-2025-11-05.json');
 
 // it detects the new stations added
 const newOnes = [];
