@@ -39,14 +39,6 @@
         },
         {
           "count": 1,
-          "type": "",
-          "power": 0,
-          "status": 1,
-          "statusDetail": "Busy",
-          "hose": false
-        },
-        {
-          "count": 1,
           "type": "CCS2",
           "power": 30,
           "status": 1,
@@ -110,7 +102,7 @@
     },
     {
       "name": "Electrolinera Leguizamón",
-      "address": "Jose Leguizamon 3463",
+      "address": "Jose Leguizamon 34630",
       "lat": -34.896317,
       "lng": -56.140618,
       "services": null,
@@ -2542,6 +2534,35 @@
       "status": "Cargando"
     },
     {
+      "name": "Parque de Minas",
+      "address": "Ruta 12 km 347.500",
+      "lat": -34.4254385,
+      "lng": -55.1938313,
+      "services": null,
+      "attendance": null,
+      "connectorStatusAcc": [
+        {
+          "count": 2,
+          "type": "Tipo 2",
+          "power": 22,
+          "status": 1,
+          "statusDetail": "Busy",
+          "hose": false
+        },
+        {
+          "count": 2,
+          "type": "CCS2",
+          "power": 60,
+          "status": 1,
+          "statusDetail": "Busy",
+          "hose": true
+        }
+      ],
+      "department": "Lavalleja",
+      "city": "Minas",
+      "status": "Cargando"
+    },
+    {
       "name": "Rincón de Valentín",
       "address": "Ruta 31 km 75",
       "lat": -31.2809458,
@@ -2858,6 +2879,14 @@
           "count": 1,
           "type": "CCS2",
           "power": 30,
+          "status": 1,
+          "statusDetail": "Busy",
+          "hose": true
+        },
+        {
+          "count": 1,
+          "type": "CCS2",
+          "power": 22,
           "status": 1,
           "statusDetail": "Busy",
           "hose": true
@@ -3544,14 +3573,6 @@
           "status": 1,
           "statusDetail": "Busy",
           "hose": true
-        },
-        {
-          "count": 1,
-          "type": "",
-          "power": 0,
-          "status": 1,
-          "statusDetail": "Busy",
-          "hose": false
         }
       ],
       "department": "Maldonado",
@@ -4057,6 +4078,27 @@
       "status": "Cargando"
     },
     {
+      "name": "TaTa Mercedes",
+      "address": "José Enrique Rodó esquina General Artigas",
+      "lat": -33.250149,
+      "lng": -58.028526,
+      "services": null,
+      "attendance": null,
+      "connectorStatusAcc": [
+        {
+          "count": 2,
+          "type": "CCS2",
+          "power": 60,
+          "status": 1,
+          "statusDetail": "Busy",
+          "hose": true
+        }
+      ],
+      "department": "Soriano",
+      "city": "Mercedes",
+      "status": "Cargando"
+    },
+    {
       "name": "TaTa Melo",
       "address": "Villanueva Saravia Pinto esquina Treinta y Tres",
       "lat": -32.363814,
@@ -4314,6 +4356,27 @@
       ],
       "department": "Montevideo",
       "city": "Montevideo",
+      "status": "Cargando"
+    },
+    {
+      "name": "TaTa Durazno",
+      "address": "Wilson Ferreira Aldunate 419",
+      "lat": -33.386637,
+      "lng": -56.524468,
+      "services": null,
+      "attendance": null,
+      "connectorStatusAcc": [
+        {
+          "count": 2,
+          "type": "CCS2",
+          "power": 60,
+          "status": 1,
+          "statusDetail": "Busy",
+          "hose": true
+        }
+      ],
+      "department": "Durazno",
+      "city": "Durazno",
       "status": "Cargando"
     }
   ],

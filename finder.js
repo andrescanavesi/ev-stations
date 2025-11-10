@@ -45,8 +45,8 @@ const findNewStations = async () => {
 const storeData = async (data) =>{
     console.info(`storing data...`)
     const fileName = await getFileName();
-    //const filePath = path.join(__dirname, `${fileName}`);
-    const filePath = fileName;
+    const filePath = path.join(__dirname, `${fileName}`);
+    //const filePath = fileName;
     console.info(`file path: ${filePath}`)
     const jsonString = JSON.stringify(data, null, 2);
 
@@ -87,9 +87,10 @@ const getFileName = async () =>{
     const minutes = date.getMinutes().toString().padStart(2, '0');
     const seconds = date.getSeconds().toString().padStart(2, '0');
 
-    const folderName = await createCurrentMonthFolder();
+    //const folderName = await createCurrentMonthFolder();
 
-    const fileName = `${folderName}/stations-${year}-${month}-${day}_${hours}-${minutes}-${seconds}.json`;
+    //const fileName = `${folderName}/stations-${year}-${month}-${day}_${hours}-${minutes}-${seconds}.json`;
+    const fileName = `stations/stations-${year}-${month}-${day}.json`;
     console.info(fileName);
     return fileName;
 }
@@ -125,7 +126,7 @@ const createCurrentMonthFolder =  async () => {
     }
 }
 
-//findNewStations().then(()=> console.info('ok')).catch((e)=> console.error(e));
+findNewStations().then(()=> console.info('ok')).catch((e)=> console.error(e));
 
 const ONE_MINUTE_MS = 60 * 1000;
 
@@ -167,4 +168,4 @@ async function start(runCount = 1) {
 }
 
 
-start().then(()=> console.info('process started')).catch((e)=> console.error(e));
+//start().then(()=> console.info('process started')).catch((e)=> console.error(e));
